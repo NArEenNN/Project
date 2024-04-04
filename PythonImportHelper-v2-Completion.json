@@ -1,0 +1,269 @@
+[
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "session_state",
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "isExtraImport": true,
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "qrcode",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "qrcode",
+        "description": "qrcode",
+        "detail": "qrcode",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "pyaes",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pyaes",
+        "description": "pyaes",
+        "detail": "pyaes",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "dotenv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "string",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "string",
+        "description": "string",
+        "detail": "string",
+        "documentation": {}
+    },
+    {
+        "label": "ZipFile",
+        "importPath": "zipfile",
+        "description": "zipfile",
+        "isExtraImport": true,
+        "detail": "zipfile",
+        "documentation": {}
+    },
+    {
+        "label": "io",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "io",
+        "description": "io",
+        "detail": "io",
+        "documentation": {}
+    },
+    {
+        "label": "init_connection",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def init_connection():\n    MONGO_URI = os.getenv(\"MONGO_URI\")\n    return MongoClient(MONGO_URI)\nclient = init_connection()\ndb = client[\"encrypted_data\"]\nusers_collection = db[\"user_data\"]\nsession_state = st.session_state\nif \"user_index\" not in st.session_state:\n    st.session_state[\"user_index\"] = 0\ndef image_to_string(image_path):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "image_to_string",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def image_to_string(image_path):\n    with open(\"QR_Images//\"+image_path, \"rb\") as image_file:\n        encoded_string = base64.b64encode(image_file.read()).decode(\"utf-8\")\n    return encoded_string\ndef string_to_image(encoded_string, new_name):\n    decoded_bytes = base64.b64decode(encoded_string)\n    if not os.path.exists(\"QR_Images\"):\n        os.makedirs(\"QR_Images\")\n    with open(\"QR_Images//\"+new_name, \"wb\") as image_file:\n        image_file.write(decoded_bytes)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "string_to_image",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def string_to_image(encoded_string, new_name):\n    decoded_bytes = base64.b64decode(encoded_string)\n    if not os.path.exists(\"QR_Images\"):\n        os.makedirs(\"QR_Images\")\n    with open(\"QR_Images//\"+new_name, \"wb\") as image_file:\n        image_file.write(decoded_bytes)\ndef generate_qr_code(data, name):\n    qr = qrcode.QRCode(version=1, box_size=12)\n    qr.add_data(data)\n    qr.make(fit=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "generate_qr_code",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def generate_qr_code(data, name):\n    qr = qrcode.QRCode(version=1, box_size=12)\n    qr.add_data(data)\n    qr.make(fit=True)\n    qr_image = qr.make_image(fill_color=\"black\", back_color=\"white\")\n    name = \"QR_Images//\" + name\n    if not os.path.exists(\"QR_Images\"):\n        os.makedirs(\"QR_Images\")\n    qr_image.save(name)\ndef generateKey(user_key, admin_auth, token_auth):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "generateKey",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def generateKey(user_key, admin_auth, token_auth):\n    key = hashlib.sha256(\n        user_key.encode(\"utf-8\")\n        + admin_auth.encode(\"utf-8\")\n        + token_auth.encode(\"utf-8\")\n    ).digest()[:16]\n    return key    \ndef signup():\n    st.title(\"Signup Page\")\n    with st.form(\"signup_form\"):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "signup",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def signup():\n    st.title(\"Signup Page\")\n    with st.form(\"signup_form\"):\n        st.write(\"Fill in the details below to create an account:\")\n        name = st.text_input(\"Name:\")\n        email = st.text_input(\"Email:\")\n        age = st.number_input(\"Age:\", min_value=0, max_value=120)\n        sex = st.radio(\"Sex:\", (\"Male\", \"Female\", \"Other\"))\n        password = st.text_input(\"Password:\", type=\"password\")\n        confirm_password = st.text_input(\"Confirm Password:\", type=\"password\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "check_login",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def check_login(username, password):\n    user = users_collection.find_one({\"email\": username, \"password\": password})\n    if user:\n        session_state[\"logged_in\"] = True\n        session_state[\"user_info\"] = user\n        st.success(\"Login successful!\")\n        return user\n    else:\n        st.error(\"Invalid credentials. Please try again.\")\n        return None",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "initialize_database",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def initialize_database():\n    try:\n        if \"users\" not in db.list_collection_names():\n            db.create_collection(\"users\")\n    except Exception as e:\n        print(f\"Error initializing database: {e}\")\ndef create_account(name, email, age, sex, password):\n    try:\n        user_info = {\n            \"name\": name,",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "create_account",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def create_account(name, email, age, sex, password):\n    try:\n        user_info = {\n            \"name\": name,\n            \"email\": email,\n            \"age\": age,\n            \"sex\": sex,\n            \"password\": password,\n            \"files\": None,\n        }",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def login():\n    st.title(\"Login Page\")\n    username = st.text_input(\"Username:\")\n    password = st.text_input(\"Password:\", type=\"password\")\n    login_button = st.button(\"Login\")\n    if login_button:\n        user = check_login(username, password)\n        if user is not None:\n            session_state[\"logged_in\"] = True\n            session_state[\"user_info\"] = user",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "render_dashboard",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def render_dashboard(user_info):\n    try:\n        st.title(f\"Welcome to the Dashboard, {user_info['name']}!\")\n        st.subheader(\"User Information:\")\n        st.write(f\"Name: {user_info['name']}\")\n        st.write(f\"Sex: {user_info['sex']}\")\n        st.write(f\"Age: {user_info['age']}\")\n        st.image(\"image.jpg\", use_column_width=True)\n    except Exception as e:\n        st.error(f\"Error rendering dashboard: {e}\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def main():\n    st.title(\"Secure Multi-Party File Storage System\")\n    page = st.sidebar.radio(\n        \"Go to\",\n        (\"Signup/Login\", \"Dashboard\", \"File Upload\", \"File Download\"),\n        key=\"Pages\",\n    )\n    if page == \"Signup/Login\":\n        st.title(\"Signup/Login Page\")\n        login_or_signup = st.radio(",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "client = init_connection()\ndb = client[\"encrypted_data\"]\nusers_collection = db[\"user_data\"]\nsession_state = st.session_state\nif \"user_index\" not in st.session_state:\n    st.session_state[\"user_index\"] = 0\ndef image_to_string(image_path):\n    with open(\"QR_Images//\"+image_path, \"rb\") as image_file:\n        encoded_string = base64.b64encode(image_file.read()).decode(\"utf-8\")\n    return encoded_string",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "db = client[\"encrypted_data\"]\nusers_collection = db[\"user_data\"]\nsession_state = st.session_state\nif \"user_index\" not in st.session_state:\n    st.session_state[\"user_index\"] = 0\ndef image_to_string(image_path):\n    with open(\"QR_Images//\"+image_path, \"rb\") as image_file:\n        encoded_string = base64.b64encode(image_file.read()).decode(\"utf-8\")\n    return encoded_string\ndef string_to_image(encoded_string, new_name):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "users_collection",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "users_collection = db[\"user_data\"]\nsession_state = st.session_state\nif \"user_index\" not in st.session_state:\n    st.session_state[\"user_index\"] = 0\ndef image_to_string(image_path):\n    with open(\"QR_Images//\"+image_path, \"rb\") as image_file:\n        encoded_string = base64.b64encode(image_file.read()).decode(\"utf-8\")\n    return encoded_string\ndef string_to_image(encoded_string, new_name):\n    decoded_bytes = base64.b64decode(encoded_string)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "session_state",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "session_state = st.session_state\nif \"user_index\" not in st.session_state:\n    st.session_state[\"user_index\"] = 0\ndef image_to_string(image_path):\n    with open(\"QR_Images//\"+image_path, \"rb\") as image_file:\n        encoded_string = base64.b64encode(image_file.read()).decode(\"utf-8\")\n    return encoded_string\ndef string_to_image(encoded_string, new_name):\n    decoded_bytes = base64.b64decode(encoded_string)\n    if not os.path.exists(\"QR_Images\"):",
+        "detail": "app",
+        "documentation": {}
+    }
+]
